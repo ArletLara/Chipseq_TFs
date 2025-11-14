@@ -10,7 +10,7 @@ This repository contains an end-to-end ChIP-seq analysis workflow for TF ChIP-Se
 - Duplicate removal and blacklist filtering for mm10
 
 ## Module 2: Peak calling and Motif discovery
-
+This module takes the filtered, duplicate-removed BAM files from Module 1 and performs TF ChIP-seq peak calling and motif analysis. For each treated/input pair, it runs MACS2 narrow peak calling, filters high-confidence peaks (score > 70), computes FRiP scores for both treated and input, and uses HOMER (mm10) to discover enriched motifs in the filtered peaks. It also generates browser-ready tracks (BigBed peaks, raw and CPM-normalized bigWigs, and fold-change bigWigs), and summarizes QC metrics such as blacklist removal, mapping flag stats, chrM/chrUn composition, library scaling factors, and a multi-sample fingerprint plot.
 
 ## Module 3: Peak selection and Counts
 
