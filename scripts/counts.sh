@@ -29,8 +29,8 @@
 # Inputs (assumed to exist under $base):
 #   - peak_calling_macs2/*${mark}*_peaks_above70.*Peak
 #       MACS2 peak calls (score-filtered upstream) for the chosen mark.
-#   - peak_calling_macs2/*_peaks_above70_summits.bed
-#       MACS2 summits (1-bp) corresponding to score-filtered peaks.
+#   - peak_calling_macs2/*_summits.bed
+#       MACS2 summits (1-bp) corresponding to filtered peaks.
 #   - filtered/*blacklisted.bam
 #       Deduplicated, blacklist-filtered BAMs (treated & input).
 #   - Tools that must be available in the active environment:
@@ -174,7 +174,7 @@ peak_calling_macs2/condition2_${mark}_reps_peaks_overlapOnly_withNamesScore.bed 
 ###############################################################################
 # Set sets of files
 candidates="peak_calling_macs2/candidate_${mark}_peaks_merged_withNamesScore.bed"
-summits=(peak_calling_macs2/*_peaks_above70_summits.bed)
+summits=(peak_calling_macs2/*_summits.bed)
 bams=(filtered/*blacklisted.bam)
 
 # ---------- A. On candidate peaks. Count reads per BAM in each merged candidate peak interval
