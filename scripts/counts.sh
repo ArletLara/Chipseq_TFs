@@ -25,6 +25,7 @@
 #         - one representative 1-bp summit per candidate peak.
 #         - fixed-size genomic bins outside the candidate
 #          peak regions to obtain background coverage.
+#    6) Calculate FRiP in candidate peaks
 #
 # Inputs (assumed to exist under $base):
 #   - peak_calling_macs2/*${mark}*_peaks_above70.*Peak
@@ -236,7 +237,16 @@ multiBamSummary bins -p 8 \
   -o counts/multibamsummary_bins_noPeaks.npz
 
 
-
+###############################################################################
+# Step 4 ▸ Calculate FRiP over peaks of interest
+###############################################################################
+for bam in filtered/*_blacklisted.bam; do
+  
+bash path/to/myprofile/data/Common_files/frip_calculation.sh \
+    ${bam} \
+    peak_calling_macs2/candidate_aFLAG_peaks_merged_withNamesScore.bed \
+    download/Allsamples_FRiP_afterpeakselection.txt
+done
 
 
 
