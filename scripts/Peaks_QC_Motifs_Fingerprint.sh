@@ -193,14 +193,14 @@ findMotifsGenome.pl peak_calling_macs2/${sample}_peaks_above70.narrowPeak \
 # Collect browser-ready track definitions for this sample in a unified file
 
 # Peak regions (MACS2 peaks as BigBed)
-echo "track name=${sample}_macs2_peak_regions bigDataUrl=\${base#/mnt/}/bigwigs_nodup/${sample}_macs2peaks.bb type=bigBed color=0,0,0 visibility=pack" >> download/ucsc_tracks_bigwigs.txt
+echo "track name=${sample}_macs2_peak_regions bigDataUrl=https://informaticsdata.liai.org/\${base#/mnt/}/bigwigs_nodup/${sample}_macs2peaks.bb type=bigBed color=0,0,0 visibility=pack" >> download/ucsc_tracks_bigwigs.txt
 
 # CPM-normalized coverage
 echo "track name=${sample}_CPM bigDataUrl=https://informaticsdata.liai.org/\${base#/mnt/}/bigwigs_nodup/${sample}_normalized.bw type=bigWig color=31,77,92 visibility=hide" >> download/ucsc_tracks_bigwigs.txt
 echo "track name=${input}_CPM bigDataUrl=https://informaticsdata.liai.org/\${base#/mnt/}/bigwigs_nodup/${input}_normalized.bw type=bigWig color=59,125,118 visibility=hide" >> download/ucsc_tracks_bigwigs.txt
 
 # Fold-change bigWig (treated vs input)
-echo "track name=FC_${sample}_vs_IgG bigDataUrl=\${base#/mnt/}/bigwigs_nodup/FC_${sample}_vs_IgG.bw type=bigWig color=0,109,119 visibility=hide" >> download/ucsc_tracks_bigwigs.txt
+echo "track name=FC_${sample}_vs_IgG bigDataUrl=https://informaticsdata.liai.org/\${base#/mnt/}/bigwigs_nodup/FC_${sample}_vs_IgG.bw type=bigWig color=0,109,119 visibility=hide" >> download/ucsc_tracks_bigwigs.txt
 
 # Raw coverage
 echo "track name=${sample} bigDataUrl=https://informaticsdata.liai.org/\${base#/mnt/}/bigwigs_nodup/${sample}.bw type=bigWig color=113,60,124 visibility=hide" >> download/ucsc_tracks_bigwigs.txt
