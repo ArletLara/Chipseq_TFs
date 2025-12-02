@@ -80,7 +80,8 @@ conda activate chipseq_env
 project=name_of_the_project
 
 # Root path for this project 
-base=/path/to/myprofile/data/$project
+path_to_my_profile=/path/to/myprofile
+base=$path_to_my_profile/data/$project
 
 # Create directories to save outputs 
 cd $base
@@ -121,14 +122,14 @@ set -euo pipefail
 module purge
 
 # Activate environment
-source /path/to/myprofile/anaconda3/etc/profile.d/conda.sh
+source /path/myprofile/anaconda3/etc/profile.d/conda.sh
 conda activate chipseq_env
 
 cd $base
 
 # Ensure HOMER mm10 support is present (no-op if already installed).
 # For me I had to install every time otherwise would fail to run.
-perl /path/to/myprofile/anaconda3/envs/chipseq_env/share/homer/.//configureHomer.pl -install mm10
+perl /path/myprofile/anaconda3/envs/chipseq_env/share/homer/.//configureHomer.pl -install mm10
 
 # -----------------------------
 # 1.1) Peak Calling with MACS2 (narrow peaks for TFs, paired-end)
@@ -159,22 +160,22 @@ cat peak_calling_macs2/${sample}_peaks_above70_fixed.narrowPeak | sort -k1,1 -k2
 
 ### bed to BigBed to visualize peak regions
 bedToBigBed \
--as=/path/to/myprofile/data/Common_files/bigNarrowPeak.as  \
+-as=$path_to_my_profile/data/Common_files/bigNarrowPeak.as  \
 -type=bed6+4 \
 peak_calling_macs2/${sample}_peaks_above70_fixed_sorted.narrowPeak \
-/path/to/myprofile/data/Common_files/mm10.chrom.sizes \
+$path_to_my_profile/data/Common_files/mm10.chrom.sizes \
 bigwigs_nodup/${sample}_macs2peaks.bb
 
 
 # -----------------------------
 # 2) FRiP (treated and input). Evaluate signal enrichment over the filtered peak set (>70).
 # -----------------------------
-bash /path/to/myprofile/data/Common_files/frip_calculation.sh \
+bash $path_to_my_profile/data/Common_files/frip_calculation.sh \
     filtered/${sample}_blacklisted.bam \
     peak_calling_macs2/${sample}_peaks_above70.narrowPeak \
     download/Allsamples_FRiP_raw.txt
 
-bash /path/to/myprofile/data/Common_files/frip_calculation.sh \
+bash $path_to_my_profile/data/Common_files/frip_calculation.sh \
     filtered/${input}_blacklisted.bam \
     peak_calling_macs2/${sample}_peaks_above70.narrowPeak \
     download/Allsamples_FRiP_raw.txt
@@ -317,7 +318,7 @@ scaling_file=$base/download/scaling_factors_fromfilteredbams.txt
 bam_suffix="_blacklisted.bam"
 
 # Run the scaling factor script (external helper)
-/path/to/myprofile/data/Common_files/get_scaling_factors.sh "$bam_dir" "$scaling_file" "$bam_suffix"
+$path_to_my_profile/data/Common_files/get_scaling_factors.sh "$bam_dir" "$scaling_file" "$bam_suffix"
 
 ###############################################################################
 # Step 7 ▸ Fingerprint plotting. Assess relative enrichment across all samples
