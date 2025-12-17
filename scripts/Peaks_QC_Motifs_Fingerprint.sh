@@ -80,6 +80,7 @@ conda activate chipseq_env
 project=name_of_the_project
 
 # Root path for this project 
+path_to_anaconda=path/to/anaconda
 path_to_my_profile=/path/to/myprofile
 base=$path_to_my_profile/data/$project
 
@@ -122,14 +123,14 @@ set -euo pipefail
 module purge
 
 # Activate environment
-source /path/myprofile/anaconda3/etc/profile.d/conda.sh
+source $path_to_anaconda/etc/profile.d/conda.sh
 conda activate chipseq_env
 
 cd $base
 
 # Ensure HOMER mm10 support is present (no-op if already installed).
 # For me I had to install every time otherwise would fail to run.
-perl /path/myprofile/anaconda3/envs/chipseq_env/share/homer/.//configureHomer.pl -install mm10
+perl $path_to_anaconda/envs/chipseq_env/share/homer/.//configureHomer.pl -install mm10
 
 # -----------------------------
 # 1.1) Peak Calling with MACS2 (narrow peaks for TFs, paired-end)
