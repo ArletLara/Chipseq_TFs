@@ -227,13 +227,19 @@ multiBamSummary BED-file -p 8 \
   -o counts/multibamsummary_summits.npz \
   --centerReads 
 
+# ---------- C. Whole coverage. Segment the genome in 10kb bins
+multiBamSummary bins -p 8 \
+  --bamfiles "${bams[@]}" \
+  --binSize 10000 --distanceBetweenBins 0 \
+  --outRawCounts download/counts/multibamsummary_10kb_bins.tab \
+  -o counts/multibamsummary_bins_noPeaks.npz
 
-# ---------- C. On non-peak regions. Segment the genome in 10kb bins and exclude  candidate peak regions
+# ---------- D. On non-peak regions. Segment the genome in 10kb bins and exclude  candidate peak regions
 multiBamSummary bins -p 8 \
   --bamfiles "${bams[@]}" \
   --blackListFileName peak_calling_macs2/candidate_${mark}_peaks_merged_withNamesScore.bed  \
   --binSize 10000 --distanceBetweenBins 0 \
-  --outRawCounts download/counts/multibamsummary_bins_noPeaks.tab \
+  --outRawCounts download/counts/multibamsummary_10kb_bins_noPeaks.tab \
   -o counts/multibamsummary_bins_noPeaks.npz
 
 
