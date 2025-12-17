@@ -57,12 +57,14 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 # ── User configuration section ───────────────────────────────────────────────
-# Name project as specified by initial folder name
+# Root path for this project 
+path_to_anaconda=/path/to/anaconda3
+path_to_my_profile=/path/to/my_profile
 project=project_name
 
 # Path to source directory containing input data and project folders
 # Assumes raw fastqs exist under $base/raw_data/
-base=/path/to/my_profile/data/$project
+base=$path_to_my_profile/data/$project
 
 # List of samples (update with your experiment names)
 # These basenames must match raw_data/${sample}_R{1,2}.fastq.gz exactly
@@ -95,7 +97,7 @@ cat <<EOF> $qsh
 
 # Initialize conda for this non-interactive shell and activate the environment
 # why: Ensures required bioinformatics tools and versions are available in PATH.
-source /path/to/my_profile/anaconda3/etc/profile.d/conda.sh
+source $path_to_anaconda/etc/profile.d/conda.sh
 conda activate chipseq_env
 
 # Move to trimming directory
@@ -114,13 +116,13 @@ fastqc ${sample}_R2_val_2.fq.gz -o ../download/fastqc/
 # Step 2.1 ▸ Plasmid contamination check on trimmed reads; external helper
 cd ..
 # Adjust -1/-2 suffixes in the call below if your trimmed file names differ.
-/path/to/my_profile/data/Common_files/plasmid_contamination_files/plasmid_contamination.sh \
+$path_to_my_profile/data/Common_files/plasmid_contamination_files/plasmid_contamination.sh \
 -s ${sample} -1 "_R1_val_1.fq.gz" -2 "_R2_val_2.fq.gz"
 
 # Step 3 ▸ Alignment to mouse genome (mm10)
 # Bowtie2 alignment using pre-built mm10 index.
 bowtie2 -p 8 \
--x /path/to/my_profile/data/Common_files/mm10_index_bt2/mm10 \
+-x $path_to_my_profile/data/Common_files/mm10_index_bt2/mm10 \
 -1 trimmed/${sample}_R1_val_1.fq.gz -2 trimmed/${sample}_R2_val_2.fq.gz \
 -S aligned/${sample}.sam
 
@@ -156,7 +158,7 @@ bedtools intersect -v -abam removed_dup/${sample}.bam \
 > removed_dup/${sample}_blacklisted_with_chrMUncl.bam
 
 bedtools intersect -v -abam removed_dup/${sample}_blacklisted_with_chrMUncl.bam \
--b /path/to/my_profile/data/Common_files/exclude_chrM__UnclChr_mm10.bed \
+-b $path_to_my_profile/data/Common_files/exclude_chrM__UnclChr_mm10.bed \
 > filtered/${sample}_blacklisted.bam
 
 # Index 
