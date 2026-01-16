@@ -86,7 +86,7 @@ base=$path_to_my_profile/data/$project
 
 # Create directories to save outputs 
 cd $base
-mkdir -p peak_calling_macs2 download
+mkdir -p peak_calling_macs2 download download/peak_annotation/
 
 
 ###############################################################################
@@ -166,6 +166,11 @@ bedToBigBed \
 peak_calling_macs2/${sample}_peaks_above70_fixed_sorted.narrowPeak \
 $path_to_my_profile/data/Common_files/mm10.chrom.sizes \
 bigwigs_nodup/${sample}_macs2peaks.bb
+
+# -----------------------------
+# 1.3) Peak annotation summary
+# -----------------------------
+annotatePeaks.pl peak_calling_macs2/${sample}_peaks_above70_fixed_sorted.narrowPeak  mm10 > download/peak_annotation/${sample}.peaks.annot.txt
 
 
 # -----------------------------
@@ -334,7 +339,7 @@ bams=("${bams[@]/#/filtered/}")                # 2) prepend directory to each el
 plotFingerprint \
 -b "${bams[@]}" \
 --smartLabels \
---plotTitle "Fingerprint: aHA + IgG" \
+--plotTitle "Fingerprint: ChIP + Input" \
 -plot download/fingerprints_all.png
 
 
