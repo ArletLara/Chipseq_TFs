@@ -72,15 +72,12 @@
 ################################################################################
 
 
-# Activate environment (per-node) and set project paths
-source /path/to/myprofile/anaconda3/etc/profile.d/conda.sh
-conda activate chipseq_env
-
 # Project identifier
 project=name_of_the_project
 
 # Root path for this project 
-path_to_anaconda=path/to/anaconda
+path_to_anaconda=/path/to/anaconda
+path_to_apps=/path/to/apps
 path_to_my_profile=/path/to/myprofile
 base=$path_to_my_profile/data/$project
 
@@ -88,6 +85,9 @@ base=$path_to_my_profile/data/$project
 cd $base
 mkdir -p peak_calling_macs2 download download/peak_annotation/
 
+# Activate environment (per-node) and set project paths
+source $path_to_my_profile/anaconda3/etc/profile.d/conda.sh
+conda activate chipseq_env
 
 ###############################################################################
 # Step 1 ▸ Generate per-sample .qsh jobs for MACS2 + FRiP + HOMER
@@ -160,7 +160,7 @@ awk 'BEGIN{OFS="\t"}{ if(\$5>1000)\$5=1000; if(\$5<0)\$5=0; print }' "peak_calli
 cat peak_calling_macs2/${sample}_peaks_above70_fixed.narrowPeak | sort -k1,1 -k2,2n > peak_calling_macs2/${sample}_peaks_above70_fixed_sorted.narrowPeak
 
 ### bed to BigBed to visualize peak regions
-bedToBigBed \
+$path_to_apps/bedToBigBed \
 -as=$path_to_my_profile/data/Common_files/bigNarrowPeak.as  \
 -type=bed6+4 \
 peak_calling_macs2/${sample}_peaks_above70_fixed_sorted.narrowPeak \
