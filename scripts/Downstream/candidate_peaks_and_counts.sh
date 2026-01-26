@@ -150,11 +150,11 @@ done
 #     it just requires two overlapping ranges from the merge of the peaks across the files.
 
 
-# Considition 1
+# Condition 1
 cat peak_calling_macs2/condition1*${mark}*above70.*Peak | sort -k1,1 -k2,2n | bedtools merge -i - -c 4,5 -o collapse,max > peak_calling_macs2/condition1_${mark}_reps_peaks_merged_withNamesScore.bed
 awk -F"\t" '$4 ~ /,/' peak_calling_macs2/condition1_${mark}_reps_peaks_merged_withNamesScore.bed > peak_calling_macs2/condition1_${mark}_reps_peaks_overlapOnly_withNamesScore.bed
 
-# Considition 2
+# Condition 2
 cat peak_calling_macs2/condition2_${mark}*above70.*Peak | sort -k1,1 -k2,2n | bedtools merge -i - -c 4,5 -o collapse,max > peak_calling_macs2/condition2_${mark}_reps_peaks_merged_withNamesScore.bed
 awk -F"\t" '$4 ~ /,/' peak_calling_macs2/condition2_${mark}_reps_peaks_merged_withNamesScore.bed > peak_calling_macs2/condition2_${mark}_reps_peaks_overlapOnly_withNamesScore.bed
 
