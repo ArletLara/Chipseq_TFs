@@ -92,8 +92,8 @@ cat <<EOF> $qsh
 
 # Initialize conda for this non-interactive shell and activate the environment
 # why: Ensures required bioinformatics tools and versions are available in PATH.
-source /path/to/anaconda3/etc/profile.d/conda.sh
-conda activate chipseq_env
+env_path=$path_to_anaconda/envs/chipseq_env
+export PATH="\$env_path/bin:\$PATH"
 
 # Move to trimming directory
 cd $base/trimmed
