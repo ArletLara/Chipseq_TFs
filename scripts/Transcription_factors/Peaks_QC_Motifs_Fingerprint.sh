@@ -85,9 +85,10 @@ base=$path_to_my_profile/data/$project
 cd $base
 mkdir -p peak_calling_macs2 download download/peak_annotation/
 
-# Activate environment (per-node) and set project paths
-source $path_to_my_profile/anaconda3/etc/profile.d/conda.sh
-conda activate chipseq_env
+# Initialize conda for this non-interactive shell and activate the environment
+# why: Ensures required bioinformatics tools and versions are available in PATH.
+env_path=$path_to_anaconda/envs/chipseq_env
+export PATH="$env_path/bin:$PATH"
 
 ###############################################################################
 # Step 1 ▸ Generate per-sample .qsh jobs for MACS2 + FRiP + HOMER
