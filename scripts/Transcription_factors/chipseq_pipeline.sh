@@ -154,7 +154,7 @@ samtools index removed_dup/${sample}.bam
 # why: Exclude systematic artifacts (ENCODE mm10 blacklist) and regions that are not of 
 # interest before downstream visualization/analyses
 bedtools intersect -v -abam removed_dup/${sample}.bam \
--b /mnt/BioAdHoc/Users/alara/data/Common_files/blacklist_mm10.bed \
+-b $path_to_my_profile/data/Common_files/blacklist_mm10.bed \
 > removed_dup/${sample}_blacklisted_with_chrMUncl.bam
 
 bedtools intersect -v -abam removed_dup/${sample}_blacklisted_with_chrMUncl.bam \
