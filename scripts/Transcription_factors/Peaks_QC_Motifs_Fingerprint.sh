@@ -77,8 +77,8 @@ project=name_of_the_project
 
 # Root path for this project 
 path_to_anaconda=/path/to/anaconda
-path_to_apps=/path/to/apps
 path_to_my_profile=/path/to/myprofile
+path_to_apps=$path_to_my_profile/apps
 base=$path_to_my_profile/data/$project
 
 # Create directories to save outputs 
