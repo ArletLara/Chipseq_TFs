@@ -250,7 +250,7 @@ multiBamSummary bins -p 8 \
 ###############################################################################
 for bam in filtered/*_blacklisted.bam; do
   
-bash path/to/myprofile/data/Common_files/frip_calculation.sh \
+bash $path_to_my_profile/data/Common_files/frip_calculation.sh \
     ${bam} \
     peak_calling_macs2/candidate_${mark}_peaks_merged_withNamesScore.bed \
     download/Allsamples_FRiP_afterpeakselection.txt
