@@ -73,12 +73,6 @@
 #     project and should be updated.
 ###############################################################################
 
-
-# Initialize conda for this non-interactive shell and activate the environment
-# why: Ensures required bioinformatics tools and versions are available in PATH.
-env_path=$path_to_anaconda/envs/chipseq_env
-export PATH="\$env_path/bin:\$PATH"
-
 # Project identifier 
 project=name_of_the_project
 
@@ -87,6 +81,12 @@ mark="aHA" # Replace with aFLAG/aHA/H3k27ac depending the dataset
 
 # Assumes raw fastqs exist under $source/raw_data/
 base=$path_to_my_profile/data/$project
+
+
+# Initialize conda for this non-interactive shell and activate the environment
+# why: Ensures required bioinformatics tools and versions are available in PATH.
+env_path=$path_to_anaconda/envs/chipseq_env
+export PATH="\$env_path/bin:\$PATH"
 
 # Create directories
 cd $base
