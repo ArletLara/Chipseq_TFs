@@ -86,7 +86,7 @@ project=name_of_the_project
 mark="aHA" # Replace with aFLAG/aHA/H3k27ac depending the dataset
 
 # Assumes raw fastqs exist under $source/raw_data/
-base=/path/to/myprofile/data/$project
+base=$path_to_my_profile/data/$project
 
 # Create directories
 cd $base
