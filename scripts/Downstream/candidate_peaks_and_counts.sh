@@ -73,6 +73,9 @@
 #     project and should be updated.
 ###############################################################################
 
+# Path
+path_to_my_profile=path/to/my/profile
+
 # Project identifier 
 project=name_of_the_project
 
