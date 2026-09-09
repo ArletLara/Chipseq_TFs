@@ -73,8 +73,9 @@
 #     project and should be updated.
 ###############################################################################
 
-# Path
+# Paths
 path_to_my_profile=path/to/my/profile
+path_to_anaconda=path/to/anaconda
 
 # Project identifier 
 project=name_of_the_project
