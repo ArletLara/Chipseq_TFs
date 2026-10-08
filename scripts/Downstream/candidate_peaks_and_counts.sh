@@ -69,6 +69,7 @@
 # Notes:
 #   - The `mark` variable controls which ChIP target (aHA/aFLAG/H3k27ac/etc.)
 #     is used in file-matching patterns and output filenames.
+#     It can be just any keyword among ChIPped samples
 #   - Project directory and SLURM output/error paths are specific to the
 #     project and should be updated.
 ###############################################################################
