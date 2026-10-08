@@ -91,7 +91,7 @@ base=$path_to_my_profile/data/$project
 # Initialize conda for this non-interactive shell and activate the environment
 # why: Ensures required bioinformatics tools and versions are available in PATH.
 env_path=$path_to_anaconda/envs/chipseq_env
-export PATH="\$env_path/bin:\$PATH"
+export PATH="$env_path/bin:$PATH"
 
 # Create directories
 cd $base
