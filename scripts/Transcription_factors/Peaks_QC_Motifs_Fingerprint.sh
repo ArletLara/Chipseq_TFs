@@ -78,6 +78,7 @@ project=name_of_the_project
 # Root path for this project 
 path_to_anaconda=/path/to/anaconda
 path_to_my_profile=/path/to/myprofile
+path_to_scratch=/path/to/scratch
 path_to_apps=$path_to_my_profile/apps
 base=$path_to_my_profile/data/$project
 
@@ -115,8 +116,8 @@ cat <<EOF> $qsh
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=80GB
 #SBATCH --time=20:00:00
-#SBATCH --output=/path/to/scratch/$project/Peaks_QC_Motifs_${sample}.out
-#SBATCH --error=/path/to/scratch/$project/Peaks_QC_Motifs_${sample}.err
+#SBATCH --output=$path_to_scratch/$project/Peaks_QC_Motifs_${sample}.out
+#SBATCH --error=$path_to_scratch/$project/Peaks_QC_Motifs_${sample}.err
 #SBATCH --mail-type=END
 
 # Safety & reproducibility toggles: Fail fast on any error/undefined var; avoid hidden environment state.
