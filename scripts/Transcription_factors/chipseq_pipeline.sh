@@ -7,7 +7,7 @@
 #           on a SLURM-managed HPC cluster.
 #
 #  Overview:
-#    This "controller" script:
+#    This script:
 #      - Generates one SLURM job script per sample.
 #      - Submits all jobs via `sbatch`.
 #    Each generated job script runs the ChIP-seq preprocessing workflow
@@ -60,6 +60,7 @@
 # Root path for this project 
 path_to_anaconda=/path/to/anaconda3
 path_to_my_profile=/path/to/my_profile
+path_to_scratch=/path/to/scratch
 project=project_name
 
 # Path to source directory containing input data and project folders
@@ -71,7 +72,7 @@ base=$path_to_my_profile/data/$project
 Files=('sample1' 'sample2' 'sample3' 'sample4')
 
 # Directory for temporary outputs (scratch)
-mkdir -p /path/to/scratch/$project
+mkdir -p $path_to_scratch/$project
 cd $base
 
 # Subdirectories (created once here; jobs write into them).
@@ -91,8 +92,8 @@ cat <<EOF> $qsh
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=80GB
 #SBATCH --time=20:00:00
-#SBATCH --output=/path/to/scratch/$project/ChIPseq_$sample.out
-#SBATCH --error=/path/to/scratch/$project/ChIPseq_$sample.err
+#SBATCH --output=$path_to_scratch/$project/ChIPseq_$sample.out
+#SBATCH --error=$path_to_scratch/$project/ChIPseq_$sample.err
 #SBATCH --mail-type=END
 
 # Initialize conda for this non-interactive shell and activate the environment
@@ -167,5 +168,5 @@ samtools index filtered/${sample}_blacklisted.bam
 EOF
 done
 
-# Submit all generated jobs
+# Submit all jobs
 for file in scripts/*_ChIPseq.qsh; do sbatch $file;done
